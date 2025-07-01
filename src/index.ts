@@ -258,7 +258,11 @@ async function main() {
 }
 
 // Run the CLI
-main().catch(error => {
-  console.error(chalk.red('Unexpected error:'), error);
-  process.exit(1);
-});
+if (process.env.NODE_ENV !== 'test') {
+  main().catch(error => {
+    console.error(chalk.red('Unexpected error:'), error);
+    process.exit(1);
+  });
+}
+
+export { main };
